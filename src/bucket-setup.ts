@@ -185,6 +185,22 @@ async function ensureBucket(
           },
         }
       }
+      if (http?.code === 'NoSuchBucket') {
+        // Observed on s3.filebase.com: the host does not serve this bucket
+        // namespace at all, so even a create answers "no such bucket".
+        return {
+          created: false,
+          step: {
+            id: 'bucket',
+            status: 'fail',
+            detail: `The endpoint answered NoSuchBucket to a create${httpLabel(http)}, so it does not host buckets under this name at all.`,
+            fix: isFilebaseHost(endpoint)
+              ? 'S3-type Filebase buckets live on https://s3.filebase.io; use that endpoint, then re-run the same command.'
+              : `Check the endpoint host: it should be the S3 API of the account that owns the bucket. ${RERUN}`,
+            http,
+          },
+        }
+      }
       if (http?.code === 'BucketAlreadyExists') {
         return {
           created: false,

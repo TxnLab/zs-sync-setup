@@ -34,6 +34,13 @@ function run(
   )
 }
 
+function createFakeBucketFailingCreate() {
+  const bucket = createFakeBucket(BUCKET)
+  bucket.setExists(false)
+  bucket.failOp('CreateBucket', 404, 'NoSuchBucket')
+  return bucket
+}
+
 function byId(steps: StepResult[], id: StepResult['id']): StepResult {
   const step = steps.find((s) => s.id === id)
   if (!step) throw new Error(`no step ${id}`)
@@ -149,6 +156,24 @@ describe('bucket setup — the bucket step', () => {
     bucket.failOp('CreateBucket', 409, 'BucketAlreadyExists')
     const outcome = await run(bucket)
     expect(outcome.steps[0].detail).toContain('taken')
+  })
+
+  it('names the host when a create itself answers NoSuchBucket', async () => {
+    // s3.filebase.com does this for an S3-type bucket that lives on
+    // s3.filebase.io: the host is the wrong namespace, not the name.
+    const bucket = createFakeBucket(BUCKET)
+    bucket.setExists(false)
+    bucket.failOp('CreateBucket', 404, 'NoSuchBucket')
+    const filebaseCom = await run(
+      bucket,
+      'other',
+      config({ endpoint: 'https://s3.filebase.com', region: 'auto' }),
+    )
+    expect(filebaseCom.ok).toBe(false)
+    expect(filebaseCom.steps[0].fix).toContain('s3.filebase.io')
+
+    const elsewhere = await run(createFakeBucketFailingCreate(), 'other')
+    expect(elsewhere.steps[0].fix).toContain('endpoint host')
   })
 
   it('treats BucketAlreadyOwnedByYou as existing', async () => {

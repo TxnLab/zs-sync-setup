@@ -201,9 +201,7 @@ async function runInteractive(options: CliOptions): Promise<number> {
   const config = normalizeS3Config(form)
 
   for (const caution of endpointCautions(config.endpoint)) {
-    p.log.warn(
-      `Works from here; the app will refuse this unless you change it. ${caution}`,
-    )
+    p.log.warn(`Passes here, but matters in the app: ${caution}`)
   }
 
   p.log.step(`Setting up ${config.bucket} at ${config.endpoint}`)
