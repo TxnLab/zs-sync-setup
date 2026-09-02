@@ -233,9 +233,7 @@ async function runInteractive(options: CliOptions): Promise<number> {
 
 function renderStep(step: StepResult): void {
   const title = STEP_TITLES[step.id]
-  if (step.probe) {
-    for (const line of probeLines(step.probe)) p.log.message(line)
-  }
+  if (step.probe) p.log.message(probeLines(step.probe).join('\n'))
   switch (step.status) {
     case 'skip':
       return
