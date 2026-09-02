@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "source": "AWS docs — 'Examples: Signature Calculation for Signature Version 4' (S3 REST API). These are the published worked examples; they are an INDEPENDENT source, not output captured from this implementation. If a case fails, fix the divergence — do not regenerate the fixture to make it pass.",
+  "note": "`signature` is the authoritative field and every case reproduced it on the first run. `canonicalRequestSha256` is a localisation aid: because the signature is cryptographically downstream of the canonical request, a matching signature PROVES the canonical request, and therefore its hash. The GET-Bucket-Lifecycle entry was transcribed wrong here at first and corrected against that proof — which is the one circumstance in which editing this file is legitimate. Never adjust `signature` to match an implementation.",
+  "credentials": {
+    "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+    "secretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+  },
+  "region": "us-east-1",
+  "service": "s3",
+  "host": "examplebucket.s3.amazonaws.com",
+  "now": "2013-05-24T00:00:00.000Z",
+  "cases": [
+    {
+      "name": "GET Object",
+      "method": "GET",
+      "pathSegments": ["test.txt"],
+      "query": [],
+      "headers": { "range": "bytes=0-9" },
+      "payload": "",
+      "canonicalRequestSha256": "7344ae5b7ee6c3e7e6b0fe0640412a37625d1fbfff95c48bbb2dc43964946972",
+      "signature": "f0e8bdb87c964420e857bd35b5d6ed310bd44f0170aba48dd91039c6036bdb41"
+    },
+    {
+      "name": "PUT Object",
+      "method": "PUT",
+      "pathSegments": ["test$file.text"],
+      "query": [],
+      "headers": {
+        "date": "Fri, 24 May 2013 00:00:00 GMT",
+        "x-amz-storage-class": "REDUCED_REDUNDANCY"
+      },
+      "payload": "Welcome to Amazon S3.",
+      "canonicalRequestSha256": "9e0e90d9c76de8fa5b200d8c849cd5b8dc7a3be3951ddb7f6a76b4158342019d",
+      "signature": "98ad721746da40c64f1a55b78f14c238d841ea1380cd77a1b5971af0ece108bd"
+    },
+    {
+      "name": "GET Bucket Lifecycle",
+      "method": "GET",
+      "pathSegments": [],
+      "query": [["lifecycle", ""]],
+      "headers": {},
+      "payload": "",
+      "canonicalRequestSha256": "9766c798316ff2757b517bc739a67f6213b4ab36dd5da2f94eaebf79c77395ca",
+      "signature": "fea454ca298b7da1c68078a5d1bdbfbbe0d65c699e0f91ac7a200a0136783543"
+    },
+    {
+      "name": "GET Bucket (List Objects)",
+      "method": "GET",
+      "pathSegments": [],
+      "query": [
+        ["max-keys", "2"],
+        ["prefix", "J"]
+      ],
+      "headers": {},
+      "payload": "",
+      "canonicalRequestSha256": "df57d21db20da04d7fa30298dd4488ba3a2b47ca3a489c74750e0f1e7df1b9b7",
+      "signature": "34b48302e7b5fa45bde8084f4b7868a86f0a534bc59db6670ed5711ef69dc6f7"
+    }
+  ]
+}

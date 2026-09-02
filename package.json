@@ -1,0 +1,73 @@
+{
+  "name": "@txnlab/zs-sync-setup",
+  "version": "0.1.0",
+  "description": "Terminal setup for ZeroSignal synced storage: creates the bucket, applies CORS, runs the connection probe, and prints the link that connects the app.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "zs-sync-setup": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TxnLab/zs-sync-setup.git"
+  },
+  "keywords": [
+    "zerosignal",
+    "s3",
+    "cors",
+    "sync",
+    "setup"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsx src/cli.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.0.0",
+    "@noble/hashes": "^2.0.0",
+    "@scure/base": "^2.0.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@types/node": "^22.10.2",
+    "@types/qrcode": "^1.5.6",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.3.0",
+    "tsup": "^8.3.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^4.0.0"
+  },
+  "packageManager": "pnpm@10.34.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

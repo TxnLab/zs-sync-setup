@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "source": "Generated 2026-09-02 by hayai-client's encodeConnectionString (src/persistence/mirror/backends/s3/connection-string.ts). The same fixture is intended to land in hayai-client in a follow-up so both repos test against one artifact. If a case fails here, the two codecs have drifted: fix the divergence, do not regenerate.",
+  "cases": [
+    {
+      "name": "filebase with prefix",
+      "providerId": "filebase",
+      "config": {
+        "endpoint": "https://s3.filebase.io",
+        "region": "auto",
+        "bucket": "zs-k7m2p9qa",
+        "prefix": "chats",
+        "accessKeyId": "FB5EXAMPLEACCESSKEY",
+        "secretAccessKey": "fbExampleSecretKey0123456789abcdefABCDEF",
+        "forcePathStyle": true
+      },
+      "encoded": "zsmirror1:eyJlbmRwb2ludCI6Imh0dHBzOi8vczMuZmlsZWJhc2UuaW8iLCJyZWdpb24iOiJhdXRvIiwiYnVja2V0IjoienMtazdtMnA5cWEiLCJhY2Nlc3NLZXlJZCI6IkZCNUVYQU1QTEVBQ0NFU1NLRVkiLCJzZWNyZXRBY2Nlc3NLZXkiOiJmYkV4YW1wbGVTZWNyZXRLZXkwMTIzNDU2Nzg5YWJjZGVmQUJDREVGIiwicHJvdmlkZXJJZCI6ImZpbGViYXNlIiwicHJlZml4IjoiY2hhdHMifQ",
+      "decoded": {
+        "providerId": "filebase",
+        "config": {
+          "endpoint": "https://s3.filebase.io",
+          "region": "auto",
+          "bucket": "zs-k7m2p9qa",
+          "accessKeyId": "FB5EXAMPLEACCESSKEY",
+          "secretAccessKey": "fbExampleSecretKey0123456789abcdefABCDEF",
+          "prefix": "chats",
+          "forcePathStyle": true
+        }
+      }
+    },
+    {
+      "name": "filebase without prefix",
+      "providerId": "filebase",
+      "config": {
+        "endpoint": "https://s3.filebase.io",
+        "region": "auto",
+        "bucket": "zs-k7m2p9qa",
+        "prefix": "",
+        "accessKeyId": "FB5EXAMPLEACCESSKEY",
+        "secretAccessKey": "fbExampleSecretKey0123456789abcdefABCDEF",
+        "forcePathStyle": true
+      },
+      "encoded": "zsmirror1:eyJlbmRwb2ludCI6Imh0dHBzOi8vczMuZmlsZWJhc2UuaW8iLCJyZWdpb24iOiJhdXRvIiwiYnVja2V0IjoienMtazdtMnA5cWEiLCJhY2Nlc3NLZXlJZCI6IkZCNUVYQU1QTEVBQ0NFU1NLRVkiLCJzZWNyZXRBY2Nlc3NLZXkiOiJmYkV4YW1wbGVTZWNyZXRLZXkwMTIzNDU2Nzg5YWJjZGVmQUJDREVGIiwicHJvdmlkZXJJZCI6ImZpbGViYXNlIn0",
+      "decoded": {
+        "providerId": "filebase",
+        "config": {
+          "endpoint": "https://s3.filebase.io",
+          "region": "auto",
+          "bucket": "zs-k7m2p9qa",
+          "accessKeyId": "FB5EXAMPLEACCESSKEY",
+          "secretAccessKey": "fbExampleSecretKey0123456789abcdefABCDEF",
+          "prefix": "",
+          "forcePathStyle": true
+        }
+      }
+    },
+    {
+      "name": "cloudflare r2",
+      "providerId": "r2",
+      "config": {
+        "endpoint": "https://0123456789abcdef0123456789abcdef.r2.cloudflarestorage.com",
+        "region": "auto",
+        "bucket": "zs-chats-r2",
+        "prefix": "chats",
+        "accessKeyId": "0123456789abcdef0123456789abcdef",
+        "secretAccessKey": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "forcePathStyle": true
+      },
+      "encoded": "zsmirror1:eyJlbmRwb2ludCI6Imh0dHBzOi8vMDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWYucjIuY2xvdWRmbGFyZXN0b3JhZ2UuY29tIiwicmVnaW9uIjoiYXV0byIsImJ1Y2tldCI6InpzLWNoYXRzLXIyIiwiYWNjZXNzS2V5SWQiOiIwMTIzNDU2Nzg5YWJjZGVmMDEyMzQ1Njc4OWFiY2RlZiIsInNlY3JldEFjY2Vzc0tleSI6IjAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmMDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWYiLCJwcm92aWRlcklkIjoicjIiLCJwcmVmaXgiOiJjaGF0cyJ9",
+      "decoded": {
+        "providerId": "r2",
+        "config": {
+          "endpoint": "https://0123456789abcdef0123456789abcdef.r2.cloudflarestorage.com",
+          "region": "auto",
+          "bucket": "zs-chats-r2",
+          "accessKeyId": "0123456789abcdef0123456789abcdef",
+          "secretAccessKey": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "prefix": "chats",
+          "forcePathStyle": true
+        }
+      }
+    },
+    {
+      "name": "amazon s3 virtual-host style",
+      "providerId": "aws",
+      "config": {
+        "endpoint": "https://s3.eu-west-1.amazonaws.com",
+        "region": "eu-west-1",
+        "bucket": "zs-chats-example-eu",
+        "prefix": "",
+        "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+        "secretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+        "forcePathStyle": false
+      },
+      "encoded": "zsmirror1:eyJlbmRwb2ludCI6Imh0dHBzOi8vczMuZXUtd2VzdC0xLmFtYXpvbmF3cy5jb20iLCJyZWdpb24iOiJldS13ZXN0LTEiLCJidWNrZXQiOiJ6cy1jaGF0cy1leGFtcGxlLWV1IiwiYWNjZXNzS2V5SWQiOiJBS0lBSU9TRk9ETk43RVhBTVBMRSIsInNlY3JldEFjY2Vzc0tleSI6IndKYWxyWFV0bkZFTUkvSzdNREVORy9iUHhSZmlDWUVYQU1QTEVLRVkiLCJwcm92aWRlcklkIjoiYXdzIiwiZm9yY2VQYXRoU3R5bGUiOmZhbHNlfQ",
+      "decoded": {
+        "providerId": "aws",
+        "config": {
+          "endpoint": "https://s3.eu-west-1.amazonaws.com",
+          "region": "eu-west-1",
+          "bucket": "zs-chats-example-eu",
+          "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+          "secretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+          "prefix": "",
+          "forcePathStyle": false
+        }
+      }
+    },
+    {
+      "name": "garage",
+      "providerId": "garage",
+      "config": {
+        "endpoint": "https://storage.example.com",
+        "region": "garage",
+        "bucket": "my-chats",
+        "prefix": "zerosignal",
+        "accessKeyId": "GK31c2f218a2e44f485b94239e",
+        "secretAccessKey": "b892c0665f0ada8a4755dae98baa3b133590e11dae3bcc1f9d769d67f16c3835",
+        "forcePathStyle": true
+      },
+      "encoded": "zsmirror1:eyJlbmRwb2ludCI6Imh0dHBzOi8vc3RvcmFnZS5leGFtcGxlLmNvbSIsInJlZ2lvbiI6ImdhcmFnZSIsImJ1Y2tldCI6Im15LWNoYXRzIiwiYWNjZXNzS2V5SWQiOiJHSzMxYzJmMjE4YTJlNDRmNDg1Yjk0MjM5ZSIsInNlY3JldEFjY2Vzc0tleSI6ImI4OTJjMDY2NWYwYWRhOGE0NzU1ZGFlOThiYWEzYjEzMzU5MGUxMWRhZTNiY2MxZjlkNzY5ZDY3ZjE2YzM4MzUiLCJwcm92aWRlcklkIjoiZ2FyYWdlIiwicHJlZml4IjoiemVyb3NpZ25hbCJ9",
+      "decoded": {
+        "providerId": "garage",
+        "config": {
+          "endpoint": "https://storage.example.com",
+          "region": "garage",
+          "bucket": "my-chats",
+          "accessKeyId": "GK31c2f218a2e44f485b94239e",
+          "secretAccessKey": "b892c0665f0ada8a4755dae98baa3b133590e11dae3bcc1f9d769d67f16c3835",
+          "prefix": "zerosignal",
+          "forcePathStyle": true
+        }
+      }
+    },
+    {
+      "name": "seaweedfs",
+      "providerId": "seaweedfs",
+      "config": {
+        "endpoint": "https://storage.example.com",
+        "region": "us-east-1",
+        "bucket": "my-chats",
+        "prefix": "",
+        "accessKeyId": "pick-a-key-name",
+        "secretAccessKey": "pick-a-long-random-secret",
+        "forcePathStyle": true
+      },
+      "encoded": "zsmirror1:eyJlbmRwb2ludCI6Imh0dHBzOi8vc3RvcmFnZS5leGFtcGxlLmNvbSIsInJlZ2lvbiI6InVzLWVhc3QtMSIsImJ1Y2tldCI6Im15LWNoYXRzIiwiYWNjZXNzS2V5SWQiOiJwaWNrLWEta2V5LW5hbWUiLCJzZWNyZXRBY2Nlc3NLZXkiOiJwaWNrLWEtbG9uZy1yYW5kb20tc2VjcmV0IiwicHJvdmlkZXJJZCI6InNlYXdlZWRmcyJ9",
+      "decoded": {
+        "providerId": "seaweedfs",
+        "config": {
+          "endpoint": "https://storage.example.com",
+          "region": "us-east-1",
+          "bucket": "my-chats",
+          "accessKeyId": "pick-a-key-name",
+          "secretAccessKey": "pick-a-long-random-secret",
+          "prefix": "",
+          "forcePathStyle": true
+        }
+      }
+    },
+    {
+      "name": "other with explicit path style",
+      "providerId": "other",
+      "config": {
+        "endpoint": "http://localhost:9000",
+        "region": "us-east-1",
+        "bucket": "zs-local",
+        "prefix": "a/b",
+        "accessKeyId": "minioadmin",
+        "secretAccessKey": "minioadmin",
+        "forcePathStyle": true
+      },
+      "encoded": "zsmirror1:eyJlbmRwb2ludCI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTAwMCIsInJlZ2lvbiI6InVzLWVhc3QtMSIsImJ1Y2tldCI6InpzLWxvY2FsIiwiYWNjZXNzS2V5SWQiOiJtaW5pb2FkbWluIiwic2VjcmV0QWNjZXNzS2V5IjoibWluaW9hZG1pbiIsInByb3ZpZGVySWQiOiJvdGhlciIsInByZWZpeCI6ImEvYiJ9",
+      "decoded": {
+        "providerId": "other",
+        "config": {
+          "endpoint": "http://localhost:9000",
+          "region": "us-east-1",
+          "bucket": "zs-local",
+          "accessKeyId": "minioadmin",
+          "secretAccessKey": "minioadmin",
+          "prefix": "a/b",
+          "forcePathStyle": true
+        }
+      }
+    },
+    {
+      "name": "secret outside the base64url alphabet",
+      "providerId": "other",
+      "config": {
+        "endpoint": "https://s3.example.com",
+        "region": "us-east-1",
+        "bucket": "zs-awkward",
+        "prefix": "",
+        "accessKeyId": "AKID",
+        "secretAccessKey": "a+b/c=d&e?f#g h",
+        "forcePathStyle": true
+      },
+      "encoded": "zsmirror1:eyJlbmRwb2ludCI6Imh0dHBzOi8vczMuZXhhbXBsZS5jb20iLCJyZWdpb24iOiJ1cy1lYXN0LTEiLCJidWNrZXQiOiJ6cy1hd2t3YXJkIiwiYWNjZXNzS2V5SWQiOiJBS0lEIiwic2VjcmV0QWNjZXNzS2V5IjoiYStiL2M9ZCZlP2YjZyBoIiwicHJvdmlkZXJJZCI6Im90aGVyIn0",
+      "decoded": {
+        "providerId": "other",
+        "config": {
+          "endpoint": "https://s3.example.com",
+          "region": "us-east-1",
+          "bucket": "zs-awkward",
+          "accessKeyId": "AKID",
+          "secretAccessKey": "a+b/c=d&e?f#g h",
+          "prefix": "",
+          "forcePathStyle": true
+        }
+      }
+    }
+  ]
+}
