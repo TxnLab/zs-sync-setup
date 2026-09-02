@@ -32,7 +32,7 @@ Nothing is written to disk, and nothing is sent anywhere except the endpoint you
 
 ## What it does
 
-1. **Bucket** — `HeadBucket`, then `CreateBucket` if missing.
+1. **Bucket** — `HeadBucket`, then `CreateBucket` if missing (except on Filebase, see below).
 2. **Bucket type** (Filebase only) — writes and deletes a test object and checks the response for an IPFS content id. An IPFS bucket is refused: its objects are fetchable by content id from public gateways, and unpinning is not a guaranteed delete.
 3. **CORS** — `PutBucketCors` with the rule the app needs (`GET, PUT, DELETE, HEAD`, all headers, `ETag` exposed, one-hour preflight cache), read back with `GetBucketCors` where the provider supports it.
 4. **Versioning** — `GetBucketVersioning`; warns if it is on, because a version history quietly keeps every chat you delete. It is never changed.

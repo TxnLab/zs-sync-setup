@@ -122,19 +122,15 @@ describe('bucket setup — the bucket step', () => {
   })
 
   it('refuses to create on a console-only provider, and says where to go', async () => {
-    const saved = PROVIDER_NOTES.filebase.createMissing
-    PROVIDER_NOTES.filebase.createMissing = 'console-only'
-    try {
-      const bucket = createFakeBucket(BUCKET)
-      bucket.setExists(false)
-      const outcome = await run(bucket, 'filebase', FILEBASE)
-      expect(outcome.ok).toBe(false)
-      expect(bucket.count('CreateBucket')).toBe(0)
-      expect(outcome.steps[0].fix).toContain('console.filebase.com')
-      expect(outcome.steps[0].fix).toContain('re-run the same command')
-    } finally {
-      PROVIDER_NOTES.filebase.createMissing = saved
-    }
+    expect(PROVIDER_NOTES.filebase.createMissing).toBe('console-only')
+    const bucket = createFakeBucket(BUCKET)
+    bucket.setExists(false)
+    const outcome = await run(bucket, 'filebase', FILEBASE)
+    expect(outcome.ok).toBe(false)
+    expect(bucket.count('CreateBucket')).toBe(0)
+    expect(outcome.steps[0].fix).toContain('console.filebase.com')
+    expect(outcome.steps[0].fix).toContain('S3-type')
+    expect(outcome.steps[0].fix).toContain('re-run the same command')
   })
 
   it('names the token scope when R2 refuses to create', async () => {
@@ -189,10 +185,12 @@ describe('bucket setup — the Filebase type check', () => {
   })
 
   it('undoes a bucket it created that turned out to be IPFS', async () => {
+    // The Filebase preset never creates, so drive the rollback path through
+    // the generic preset pointed at a Filebase host.
     const bucket = createFakeBucket(BUCKET)
     bucket.setExists(false)
     bucket.ipfsMode(true)
-    const outcome = await run(bucket, 'filebase', FILEBASE)
+    const outcome = await run(bucket, 'other', FILEBASE)
     expect(outcome.ok).toBe(false)
     const type = byId(outcome.steps, 'bucket-type')
     expect(type.status).toBe('fail')

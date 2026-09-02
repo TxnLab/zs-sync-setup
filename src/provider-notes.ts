@@ -7,9 +7,9 @@ import type { S3ProviderId } from './s3/providers.ts'
 /**
  * What to do when `HeadBucket` says the bucket is not there.
  *
- * `console-only` exists for Filebase, where a bucket created through the S3
- * API may land on the IPFS network with no way to choose otherwise. Flip it
- * per the live findings; the type check runs either way.
+ * `console-only` is Filebase: a bucket created through its S3 API lands on
+ * the IPFS network (observed 2026-09-02), and `CreateBucket` offers no way to
+ * choose otherwise. The type check still runs on the bucket the user made.
  */
 export type CreateMissingPolicy = 'create-then-verify' | 'console-only'
 
@@ -33,9 +33,9 @@ export const PROVIDER_NOTES: Record<S3ProviderId, ProviderNotes> = {
   filebase: {
     keysAt: 'https://console.filebase.com/keys',
     bucketsAt: 'https://console.filebase.com/buckets',
-    createMissing: 'create-then-verify',
+    createMissing: 'console-only',
     createForbidden:
-      'Filebase refused to create the bucket with this key. Create it in the console (choose the S3 bucket type, not IPFS) and re-run.',
+      'Filebase buckets are never created by this tool: through the S3 API they land on IPFS. Create it in the console (choose the S3 bucket type, not IPFS) and re-run.',
     corsForbidden:
       'Filebase refused the CORS change with this key. On the bucket’s CORS tab in the console, set Configuration to Public Read-Write, then re-run.',
     regionHint: 'For Filebase the region must stay `auto`.',
