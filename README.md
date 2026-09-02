@@ -63,7 +63,7 @@ pnpm install
 pnpm test        # vitest, against an in-memory fake bucket
 pnpm typecheck && pnpm lint
 pnpm build       # tsup → dist/
-pnpm dev -- --help
+pnpm dev --help
 ```
 
 The SigV4 signer and the `zsmirror1:` codec are copies of the ZeroSignal client's, pinned by shared fixtures under `test/vectors/`.

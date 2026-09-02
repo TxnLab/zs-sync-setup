@@ -1,5 +1,7 @@
 #!/usr/bin/env node
+import { realpathSync } from 'node:fs'
 import { createRequire } from 'node:module'
+import { pathToFileURL } from 'node:url'
 
 import * as p from '@clack/prompts'
 import QRCode from 'qrcode'
@@ -216,9 +218,7 @@ async function runInteractive(options: CliOptions): Promise<number> {
   }
 
   const handoff = composeHandoff(config, providerId, options.appUrl)
-  p.note(handoff.link, 'Open this link on this device to connect')
-  p.note(handoff.connectionString, 'Or paste this into the app on any device')
-  p.log.message(BEARER_LINE)
+  printHandoff(handoff, (line) => process.stdout.write(line))
   if (options.qr) {
     const qr = await QRCode.toString(handoff.link, {
       type: 'terminal',
@@ -249,6 +249,35 @@ function renderStep(step: StepResult): void {
   }
 }
 
+/** OSC 8 terminal hyperlink. Terminals without support show the label alone. */
+function hyperlink(url: string, label: string): string {
+  return `\u001b]8;;${url}\u0007${label}\u001b]8;;\u0007`
+}
+
+/**
+ * The link and the string are written as raw lines, never through a clack
+ * box: the box hard-wraps at terminal width, which stops link detection at
+ * the first row and puts gutter characters into a copied string. A raw line
+ * soft-wraps, so both survive click and copy.
+ */
+export function printHandoff(
+  handoff: { link: string; connectionString: string },
+  write: (line: string) => void,
+  tty = process.stdout.isTTY === true,
+): void {
+  const gutter = '│  '
+  write(`${gutter}Open this on this device to connect:\n`)
+  write(
+    `${gutter}${tty ? hyperlink(handoff.link, handoff.link) : handoff.link}\n`,
+  )
+  write(`${gutter}\n`)
+  write(`${gutter}Or paste this into the app on any device:\n`)
+  write(`${gutter}${handoff.connectionString}\n`)
+  write(`${gutter}\n`)
+  write(`${gutter}${BEARER_LINE}\n`)
+  write(`${gutter}\n`)
+}
+
 /** One line per probe step: the failed one and everything after it did not run. */
 export function probeLines(test: S3ConnectionTest): string[] {
   const failedAt = test.ok
@@ -260,10 +289,24 @@ export function probeLines(test: S3ConnectionTest): string[] {
   })
 }
 
-main().then(
-  (code) => process.exit(code),
-  (err) => {
-    console.error(err instanceof Error ? err.message : String(err))
-    process.exit(1)
-  },
-)
+/** Executed as a program, rather than imported for its helpers? Resolves the npm bin symlink. */
+function isMain(): boolean {
+  try {
+    return (
+      process.argv[1] !== undefined &&
+      pathToFileURL(realpathSync(process.argv[1])).href === import.meta.url
+    )
+  } catch {
+    return false
+  }
+}
+
+if (isMain()) {
+  main().then(
+    (code) => process.exit(code),
+    (err) => {
+      console.error(err instanceof Error ? err.message : String(err))
+      process.exit(1)
+    },
+  )
+}
