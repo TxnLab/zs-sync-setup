@@ -62,7 +62,7 @@ The bucket sees ciphertext plus shape: file counts, sizes, device ids and write 
 pnpm install
 pnpm test        # vitest, against an in-memory fake bucket
 pnpm typecheck && pnpm lint
-pnpm build       # tsup → dist/
+pnpm build       # tsdown → dist/
 pnpm dev --help
 ```
 
