@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Terminal setup for ZeroSignal synced storage: creates the bucket, applies CORS, runs the connection probe, and prints the link that connects the app.",
   "license": "Apache-2.0",
+  "author": "Doug Richar <drichar@gmail.com>",
   "type": "module",
   "bin": {
     "zs-sync-setup": "./dist/cli.js"
@@ -26,8 +27,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TxnLab/zs-sync-setup.git"
+    "url": "git+https://github.com/TxnLab/zs-sync-setup.git"
   },
+  "homepage": "https://github.com/TxnLab/zs-sync-setup#readme",
+  "bugs": "https://github.com/TxnLab/zs-sync-setup/issues",
   "keywords": [
     "zerosignal",
     "s3",
